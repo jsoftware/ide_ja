@@ -104,8 +104,8 @@ if. fexist script do. 0 return. end.
 sminfo name;addons_msg rplc 'XX';name;'YY';addon
 1
 )
-demojc=: 3 : 0
-p=. jpath '~addons/ide/ja/demo/jcdemo.ijs'
+demoja=: 3 : 0
+p=. jpath '~addons/ide/ja/demo/jademo.ijs'
 if. addons_missing 'jandroid demos';'ide/ja';p do. return. end.
 load p
 )
@@ -546,12 +546,12 @@ textview=: textview_ja_
 
 mbinfo_ja_=: wdinfo
 coclass 'ja'
-JCREQ=: '1.0.5'
+JAREQ=: '1.0.0'
 checkjcversion=: 3 : 0
 f=. 1000 #. 0 ". ' ' I.@('.'=])} ]
 ver=. wd 'version'
 act=. f (<./ ver i.'/s') {. ver
-req=. f JCREQ
+req=. f JAREQ
 if. req <: act do. return. end.
 msg=. 'The JAndroid application needs updating.',LF2
 msg=. msg,'Please download and install the latest Android apk.'

@@ -41,7 +41,11 @@ JCDEMO=: 0 : 0
 pc jademo closeok;pn "Demos Select";
 bin v;
 cc static1 static;cn "static1";
+bin h;
 cc addons button;cn "Install addons";
+bin s;
+cc showcase button;cn "Install showcase demo";
+bin z;
 wh _1 _2;cc listbox listbox;
 bin z;
 rem form end;
@@ -50,7 +54,7 @@ rem form end;
 NB. =========================================================
 jademo_run=: 3 : 0
 wd JCDEMO
-t=. 'Select a JAndroid demo from the list below.',LF2
+t=. 'Select a jandroid demo from the list below.',LF2
 t=. t,'Click "install addons" to install the addons',LF
 t=. t,'needed for the demos.'
 wd 'set static1 text *',t
@@ -102,7 +106,15 @@ jademo_addons_button=: 3 : 0
 require 'pacman'
 'update' jpkg ''
 'install' jpkg 'graphics/bmp graphics/gl2 graphics/plot graphics/viewmat'
-smoutput 'All JAndroid demo addons installed.'
+wd 'mb toast *jandroid demo addons installed'
+)
+
+NB. =========================================================
+jademo_showcase_button=: 3 : 0
+require 'pacman'
+'update' jpkg ''
+'install' jpkg 'demos/wd'
+wd 'mb toast *showcase demo installed'
 )
 
 NB. =========================================================

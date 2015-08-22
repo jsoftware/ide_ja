@@ -12,7 +12,7 @@ wd 'bin v'
 wd 'cc pic image'
 wd 'cc jpg image '
 wd 'cc png image fitxy'
-wd 'cc red image center'
+wd 'cc blue image center'
 wd 'bin z'
 wd 'pshow'
 wd 'set pic image *',jpath '~addons/graphics/bmp/toucan.bmp'
@@ -24,10 +24,10 @@ NB. flip and save as png
 d1=. |."1 d
 (<jpath '~temp/toucan.png') 1!:2~ d1 putimg_ja_ 'png'
 wd 'set png image *',jpath '~temp/toucan.png'
-NB. pure red
+NB. pure blue
 d2=. setalpha 20 200$255
-d2 writeimg_ja_ jpath '~temp/red.png'
-wd 'set red image *',jpath '~temp/red.png'
+d2 writeimg_ja_ jpath '~temp/blue.png'
+wd 'set blue image *',jpath '~temp/blue.png'
 )
 
 wd 'activity ', >coname''
