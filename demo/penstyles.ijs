@@ -1,7 +1,9 @@
 NB. pen styles demo
 
-coclass 'jademo'
+coclass 'demopenstyle'
 coinsert 'jgl2'
+
+onCreate=: penstyle_run
 
 NB. =========================================================
 PenStyles=: cutopen 0 : 0
@@ -15,14 +17,17 @@ Dash Dot Dot Line
 
 NB. =========================================================
 penstyle_run=: 3 : 0
-if. -. checkrequire 'gl2';'graphics/gl2' do. return. end.
+if. -. checkrequire_jademo_ 'gl2';'graphics/gl2' do. return. end.
 require 'gl2'
 coinsert 'jgl2'
 wd 'pc penstyle escclose closeok'
 wd 'pn Pen Styles'
-wd 'minwh 400 270'
+wd 'wh _1 _1'
 wd 'cc g isidraw flush'
 wd 'pshow'
+)
+
+penstyle_g_resize=: 3 : 0
 off=. <.-:{:glqextent'X'
 glfill 255 255 255 255
 glrgb 0 0 255
@@ -33,7 +38,6 @@ for_i. i.#PenStyles do.
   gltextxy 230,y-off
   gltext (":i),' ',i pick PenStyles
 end.
-glpaint''
 )
 
-penstyle_run''
+wd 'activity ', >coname''

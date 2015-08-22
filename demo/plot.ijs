@@ -1,8 +1,10 @@
 
-coclass 'jademo'
+coclass 'demoplot'
+
+onCreate=: run
 
 run=: 3 : 0
-if. -. checkrequire 'plot';'graphics/plot' do. return. end.
+if. -. checkrequire_jademo_ 'plot';'graphics/plot' do. return. end.
 require 'plot math/misc/trig'
 steps=. {. + (1&{ - {.) * (i.@>: % ])@{:
 pd 'reset'
@@ -16,4 +18,4 @@ pd x;cos ^x
 pd 'show'
 )
 
-run''
+wd 'activity ', >coname''

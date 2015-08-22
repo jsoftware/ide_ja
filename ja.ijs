@@ -140,24 +140,11 @@ helpcontext1=: 3 : 0
 require '~addons/ide/ja/help.ijs'
 helpcontext1 y
 )
-RGBSEQ=: 1
 getimg=: 3 : 0
-if. m=. wdgetimg y;(#y);wh=. 2$2-2 do.
-  d=. _2 ic memr m,0,(*/wh,4),2
-  wdreadimg 2#<<0
-  (|.wh)$ fliprgb^:(-.RGBSEQ) d
-else.
-  0 0$2-2
-end.
+wdgetimg_jni_ y
 )
 readimg=: 3 : 0
-if. m=. wdreadimg (utf8 ,y);wh=. 2$2-2 do.
-  d=. _2 ic memr m,0,(*/wh,4),2
-  wdreadimg 2#<<0
-  (|.wh)$ fliprgb^:(-.RGBSEQ) d
-else.
-  0 0$2-2
-end.
+wdreadimg_jni_ (utf8 ,y)
 )
 putimg=: 4 : 0
 if3=. (3=#$x) *. 3={:$x
@@ -176,19 +163,13 @@ elseif. 2< #y do.
   opt=. 2{.}.y
 end.
 if. 'jpg'-:type do. type=. 'jpeg'
-elseif. 'tif'-:type do. type=. 'tiff'
 end.
 type=. toupper type
 if. 'quality'-:>@{.opt do. quality=. <. >@{:opt end.
-d=. fliprgb^:(-.RGBSEQ) d
-m=. wdputimg (2 ic d); (w,h); (len=. ,_1); type; quality
-if. m do.
-  z=. memr m,0,len,2
-  wdputimg (4#(<<0)),<0
-  z
-else.
-  ''
-end.
+if. (_1=quality) *. ('JPEG'-:type) do. quality=. 75 end.
+if. (_1=quality) *. ('PNG'-:type) do. quality=. 100 end.
+d=. fliprgb^:(-.RGBSEQ_j_) d
+r=. wdputimg_jni_ d; w; h; type; quality
 )
 writeimg=: 4 : 0
 if3=. (3=#$x) *. 3={:$x
@@ -210,13 +191,173 @@ else.
 end.
 type=. tolower type
 if. 'jpg'-:type do. type=. 'jpeg'
-elseif. 'tif'-:type do. type=. 'tiff'
 end.
 type=. toupper type
 if. 'quality'-:>@{.opt do. quality=. <. >@{:opt end.
-d=. fliprgb^:(-.RGBSEQ) d
-r=. wdwriteimg (2 ic d); (w,h); f; type; quality
+if. (_1=quality) *. ('JPEG'-:type) do. quality=. 75 end.
+if. (_1=quality) *. ('PNG'-:type) do. quality=. 100 end.
+d=. fliprgb^:(-.RGBSEQ_j_) d
+r=. wdwriteimg_jni_ d; w; h; f; type; quality
 EMPTY
+)
+
+wdreadimg_jni_=: 3 : 0
+try.
+  buffer=. ''
+  jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
+  jniCheck cls=. FindClass <'java/lang/Object'
+  jniCheck arr=. NewObjectArray 3; cls; 0
+  jniCheck SetObjectArrayElement arr; 0; 0
+  jniCheck SetObjectArrayElement arr; 1; 0
+  jniCheck SetObjectArrayElement arr; 2; 0
+  jniCheck rc=. app ('wdreadimg (Ljava/lang/String;[Ljava/lang/Object;)I' jniMethod)~ y;arr
+  if. rc=0 do.
+    jniCheck array=. GetObjectArrayElement arr; 0
+    jniCheck len=. GetArrayLength <array
+    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
+    jniCheck width=. GetObjectArrayElement arr; 1
+    jniCheck w=. width ('intValue ()I' jniMethod)~ ''
+    jniCheck height=. GetObjectArrayElement arr; 2
+    jniCheck h=. height ('intValue ()I' jniMethod)~ ''
+    jniCheck DeleteLocalRef"0 app;cls;arr;array;width;height
+  else.
+    jniCheck DeleteLocalRef"0 app;cls;arr
+  end.
+catch.
+  rc=. _3
+  if. 0~:exc=. ExceptionOccurred'' do.
+    if. ''-:err=. jniException exc do.
+      err=. 'JNI exception'
+    end.
+  else.
+    err=. 13!:12''
+  end.
+end.
+res=. 0 0$2-2
+select. rc
+case. 0 do.
+  res=. (h,w)$ fliprgb^:(-.RGBSEQ_j_) buffer
+case. _3 do.
+  smoutput 'JNI error: ', err
+  err (13!:8) 3
+case. do.
+  'wdreadimg error' (13!:8) 3
+end.
+res
+)
+
+wdgetimg_jni_=: 3 : 0
+try.
+  buffer=. ''
+  jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
+  jniCheck cls=. FindClass <'java/lang/Object'
+  jniCheck arr=. NewObjectArray 3; cls; 0
+  jniCheck SetObjectArrayElement arr; 0; 0
+  jniCheck SetObjectArrayElement arr; 1; 0
+  jniCheck SetObjectArrayElement arr; 2; 0
+  jniCheck iarr=. NewByteArray <#y
+  jniCheck SetByteArrayRegion iarr; 0; (#y); ,y
+  jniCheck rc=. app ('wdgetimg ([B[Ljava/lang/Object;)I' jniMethod)~ iarr;arr
+  if. rc=0 do.
+    jniCheck array=. GetObjectArrayElement arr; 0
+    jniCheck len=. GetArrayLength <array
+    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
+    jniCheck width=. GetObjectArrayElement arr; 1
+    jniCheck w=. width ('intValue ()I' jniMethod)~ ''
+    jniCheck height=. GetObjectArrayElement arr; 2
+    jniCheck h=. height ('intValue ()I' jniMethod)~ ''
+    jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array;width;height
+  else.
+    jniCheck DeleteLocalRef"0 app;cls;arr;iarr
+  end.
+catch.
+  rc=. _3
+  if. 0~:exc=. ExceptionOccurred'' do.
+    if. ''-:err=. jniException exc do.
+      err=. 'JNI exception'
+    end.
+  else.
+    err=. 13!:12''
+  end.
+end.
+res=. 0 0$2-2
+select. rc
+case. 0 do.
+  res=. (h,w)$ fliprgb^:(-.RGBSEQ_j_) buffer
+case. _3 do.
+  smoutput 'JNI error: ', err
+  err (13!:8) 3
+case. do.
+  'wdgetimg error' (13!:8) 3
+end.
+res
+)
+
+wdwriteimg_jni_=: 3 : 0
+'data w h f type quality'=. y
+try.
+  jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
+  jniCheck iarr=. NewIntArray <#data
+  jniCheck SetIntArrayRegion iarr; 0; (#data); data
+  jniCheck rc=. app ('wdwriteimg ([IIILjava/lang/String;Ljava/lang/String;I)I' jniMethod)~ iarr;w;h;f;type;quality
+  jniCheck DeleteLocalRef"0 app;iarr
+catch.
+  rc=. _3
+  if. 0~:exc=. ExceptionOccurred'' do.
+    if. ''-:err=. jniException exc do.
+      err=. 'JNI exception'
+    end.
+  else.
+    err=. 13!:12''
+  end.
+end.
+select. rc
+case. 0 do.
+case. _3 do.
+  smoutput 'JNI error: ', err
+  err (13!:8) 3
+case. do.
+end.
+rc
+)
+
+wdputimg_jni_=: 3 : 0
+'data w h type quality'=. y
+try.
+  buffer=. ''
+  jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
+  jniCheck cls=. FindClass <'java/lang/Object'
+  jniCheck arr=. NewObjectArray 1; cls; 0
+  jniCheck SetObjectArrayElement arr; 0; 0
+  jniCheck iarr=. NewIntArray <#data
+  jniCheck SetIntArrayRegion iarr; 0; (#data); data
+  jniCheck rc=. app ('wdputimg ([IIILjava/lang/String;I[Ljava/lang/Object;)I' jniMethod)~ iarr;w;h;type;quality;arr
+  if. rc=0 do.
+    jniCheck array=. GetObjectArrayElement arr; 0
+    jniCheck len=. GetArrayLength <array
+    jniCheck GetByteArrayRegion array; 0; len; buffer=. len#{.a.
+    jniCheck DeleteLocalRef"0 app;cls;iarr;arr;array
+  else.
+    jniCheck DeleteLocalRef"0 app;cls;iarr;arr
+  end.
+catch.
+  rc=. _3
+  if. 0~:exc=. ExceptionOccurred'' do.
+    if. ''-:err=. jniException exc do.
+      err=. 'JNI exception'
+    end.
+  else.
+    err=. 13!:12''
+  end.
+end.
+select. rc
+case. 0 do.
+case. _3 do.
+  smoutput 'JNI error: ', err
+  err (13!:8) 3
+case. do.
+end.
+buffer
 )
 require 'jni'
 GetJNIENV_jni_''
@@ -232,7 +373,7 @@ case. _1 do.
 case. _2 do.
   _2 [\ <;._2 p
 case. _3 do.
-  smoutput '**wd JNI error: ',p
+  smoutput 'JNI error: ',p
   p (13!:8) 3
 case. do.
   (LF,~wd ::(''"_)'qer') (13!:8) 3
@@ -367,14 +508,15 @@ f=. 8 u: DEL&, @ (,&DEL) @ -.&(0 127{a.)
 empty wd 'mb info ',(f a),' ',(f b)
 )
 wdquery=: 3 : 0
-0 3 wdquery y
+'yes no' wdquery y
 :
-msg=. ' mb_'&,&.> res=. ;:'ok cancel yes no save discard'
 t=. x [ 'a b'=. _2{. boxopen y
+if. 32~:(3!:0) t do. t=. ;:t end.
+t=. DEL&, @ (,&DEL) &.>t
 if. 2=#$b=. ":b do. b=. }.,LF,.b end.
 f=. 8 u: DEL&, @ (,&DEL) @ -.&(0 127{a.)
-m=. 'mb query', (;t{msg), ' ', (f a),' ',(f b)
-res i. <wd m
+m=. 'mb query dialog ',(f a),' ',(f b),' ', ;x
+wd m
 )
 mbopen=: 3 : 0
 jpathsep wd 8 u: 'mb open1 ',y
@@ -382,11 +524,6 @@ jpathsep wd 8 u: 'mb open1 ',y
 mbsave=: 3 : 0
 jpathsep wd 8 u: 'mb save ',y
 )
-
-wdreadimg=: ('"',libjqt,'" wdreadimg > x *c *i')&cd
-wdgetimg=: ('"',libjqt,'" wdgetimg > x *c i *i')&cd
-wdwriteimg=: ('"',libjqt,'" wdwriteimg > i *c *i *c *c i')&cd
-wdputimg=: ('"',libjqt,'" wdputimg > x *c *i *i *c i')&cd
 wdget=: 4 : 0
 nms=. {."1 y
 vls=. {:"1 y
@@ -406,6 +543,8 @@ clipwrite=: clipwrite_ja_
 getsha1=: getsha1_ja_
 gethash=: gethash_ja_
 textview=: textview_ja_
+
+mbinfo_ja_=: wdinfo
 coclass 'ja'
 JCREQ=: '1.0.5'
 checkjcversion=: 3 : 0

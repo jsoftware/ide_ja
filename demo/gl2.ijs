@@ -1,10 +1,12 @@
 NB. eric's gl2 demo
 
-coclass 'jademo'
+coclass 'demogl2'
+
+onCreate=: gl2_run
 
 NB. =========================================================
 gl2_run=: 3 : 0
-if. -. checkrequire 'gl2';'graphics/gl2' do. return. end.
+if. -. checkrequire_jademo_ 'gl2';'graphics/gl2' do. return. end.
 require 'gl2'
 coinsert 'jgl2'
 data=: ''
@@ -99,4 +101,5 @@ glpaint''
 )
 
 NB. =========================================================
-gl2_run''
+wd 'activity ',>coname''
+

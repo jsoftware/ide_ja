@@ -6,20 +6,16 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.0'
+VERSION=: '1.0.1'
 
 FILES=: 0 : 0
-console.ijs
 debugs.ijs
 help.ijs
 keys.ijs
 pacman.ijs
 ja.ijs
-jaxml.ijs
 config/
-data/
 demo/
-js/
 images/
 )
 

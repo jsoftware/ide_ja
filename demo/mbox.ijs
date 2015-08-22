@@ -1,62 +1,93 @@
 NB. mb (message box) demo
 NB.
+NB. all mb cmd must be called with a current form
+NB.
 NB. the message box syntax is:
 NB.   wd 'mb type buttons title message'
 NB.
 NB. type specifies the icon and default behaviour:
-NB.  info      (default OK button)
-NB.  warn      (default OK button)
-NB.  critical  (default OK button)
-NB.  query     (requires two or three buttons, default is first given)
-NB.             note - display order is platform-dependent
+NB.  info      [title] msg
+NB.  about     identical to info
+NB.  toast     msg [0|1]  (1=short duration)
+NB.  query     callback [title] msg [positive negative neutral]
 NB.
-NB. if 1 button, there is no result,
-NB. otherwise the result is the lowercase button label
+NB. query will call verbs in the form's locale
+NB. form_callback_positive
+NB. form_callback_negative
+NB. form_callback_neutral
 NB.
-NB. buttons are from the set, a button starts with = is the default:
-NB.  mb_ok
-NB.  mb_open
-NB.  mb_save
-NB.  mb_cancel
-NB.  mb_close
-NB.  mb_discard
-NB.  mb_apply
-NB.  mb_reset
-NB.  mb_restoredefaults
-NB.  mb_help
-NB.  mb_saveall
-NB.  mb_yes
-NB.  mb_yestoall
-NB.  mb_no
-NB.  mb_notoall
-NB.  mb_abort
-NB.  mb_retry
-NB.  mb_ignore
 
-coclass 'jademo'
+coclass 'demombox'
 
-demo1=: 3 : 0
+
+onCreate=: mboxdemo_run
+
+mboxdemo_run=: 3 : 0
+wd 'pc mbox'
+wd 'bin v'
+wd 'bin h'
+wd 'cc b1 button;cn toast'
+wd 'cc b2 button;cn toast long'
+wd 'bin z'
+wd 'bin h'
+wd 'cc b3 button;cn info'
+wd 'cc b4 button;cn about'
+wd 'bin z'
+wd 'bin h'
+wd 'cc b5 button;cn query 2 buttons'
+wd 'cc b6 button;cn query 3 buttons'
+wd 'bin z'
+wd 'bin h'
+wd 'cc b7 button;cn wdquery 2 buttons'
+wd 'cc b8 button;cn wdquery 3 buttons'
+wd 'bin z'
+wd 'bin z'
+wd 'pshow'
+)
+
+mbox_b1_button=: 3 : 0
+wd 'mb toast *Job finished.',LF,LF,'Goodbye.'
+)
+
+mbox_b2_button=: 3 : 0
+wd 'mb toast ',DEL,'Long job finished.',LF,LF,'Goodbye.',DEL,' 0'
+)
+
+mbox_b3_button=: 3 : 0
 wd 'mb info *Job finished.',LF,LF,'Goodbye.'
 )
 
-demo2=: 3 : 0
-wd 'mb warn "Model Run" "Job finished early."'
+mbox_b4_button=: 3 : 0
+wd 'mb about "Model Run" "Job finished early."'
 )
 
-demo3=: 3 : 0
-wd 'mb critical "Model Run" "Job failed."'
+mbox_b5_button=: 3 : 0
+wd 'mb query dialog "Model Run" "OK to save?" ok cancel'
 )
 
-demo4=: 3 : 0
-wd 'mb query mb_ok mb_cancel "Model Run" "OK to save?"'
+mbox_b6_button=: 3 : 0
+wd 'mb query dialog "Model Run" "OK to continue?" ok no cancel'
 )
 
-demo5=: 3 : 0
-wd 'mb query mb_yes =mb_no mb_cancel "Model Run" "OK to continue?"'
+mbox_b7_button=: 3 : 0
+'ok cancel' wdquery 'Model Run';'OK to save?'
 )
 
-demo1''
-demo2''
-demo3''
-smoutput demo4''
-smoutput demo5''
+mbox_b8_button=: 3 : 0
+'ok no cancel' wdquery 'Model Run';'OK to continue?'
+)
+
+mbox_dialog_positive=: 3 : 0
+wd 'mb toast postive'
+)
+
+mbox_dialog_negative=: 3 : 0
+wd 'mb toast negative'
+)
+
+mbox_dialog_neutral=: 3 : 0
+wd 'mb toast neutral'
+)
+
+NB. =========================================================
+wd 'activity ', >coname''

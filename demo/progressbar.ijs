@@ -1,27 +1,30 @@
 NB. progressbar demo
 NB.
-NB. cc prog progressbar [v] [min] [max] [value];
+NB. cc prog progressbar [style] [max] [value];
 NB.
-NB. min,max,value should be integers
+NB. style : horizontal inverse large large_inverse small small_inverse
+NB.    style must be horizontal to show progress status
+NB.
+NB. max,value should be integers
 
-coclass 'jademo'
+coclass 'demoprogressbar'
+
+onCreate=: pbdemo_run
 
 NB. =========================================================
 PBdemo=: 0 : 0
 pc pbdemo closeok escclose;
-cc prog progressbar 0 20 7;
+wh _1 _2;cc prog progressbar horizontal 20 7;
 )
 
 NB. =========================================================
 pbdemo_run=: 3 : 0
-P=. jpath '~addons/ide/ja/images/'
 wd PBdemo
-wd 'pmove 700 10 400 200'
 wd 'pshow'
 )
 
 NB. =========================================================
-pbdemo_run''
+wd 'activity ', >coname''
 smoutput 0 : 0
 Try:
   wd 'set prog pos 11'

@@ -1,6 +1,8 @@
 NB. menu demo
 
-coclass 'jademo'
+coclass 'demomenu'
+
+onCreate=: test
 
 test=: 3 : 0
 wd 'pc test'
@@ -28,15 +30,13 @@ wd 'set sidebar checked 1'
 wd 'setenable font 0'
 wd 'cc list listbox'
 wd 'set list items one two three'
-wd 'pmove 700 10 300 200'
 wd 'pshow'
 )
 
 NB. =========================================================
 test_close=: 3 : 0
 wd 'pclose'
-showevents_ja_ 0
 )
 
-showevents_ja_ 2
-test''
+wd 'activity ', >coname''
+

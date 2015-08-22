@@ -1,42 +1,39 @@
-NB. dial demo
+NB. slider demo
 NB.
-NB. cc track dial [w] [v] [numeric options]
+NB. cc track slider [numeric options]
 NB.
 NB. numeric options are:
-NB. minimum
-NB. single step
-NB. page step
+NB. step
 NB. maximum
 NB. position
 
 NB.
-NB. min,max,value should be integers
+NB. max,value should be integers
 
-coclass 'jademo'
+coclass 'demoseekbar'
+
+onCreate=: sliderdemo_run
 
 NB. =========================================================
-DLdemo=: 0 : 0
-pc dialdemo;
-cc track dial v 2 1 5 20 7;
+SLdemo=: 0 : 0
+pc sliderdemo;
+wh _1 _2; cc track seekbar 5 20 7;
 )
 
 NB. =========================================================
-dialdemo_close=: 3 : 0
+sliderdemo_close=: 3 : 0
 wd 'pclose'
-showevents_ja_ 0
 )
 
 NB. =========================================================
-dialdemo_run=: 3 : 0
+sliderdemo_run=: 3 : 0
 P=. jpath '~addons/ide/ja/images/'
-wd DLdemo
-wd 'pmove 700 10 400 200'
+wd SLdemo
 wd 'pshow'
 )
 
 NB. =========================================================
-showevents_ja_ 2
-dialdemo_run''
+wd 'activity ', >coname''
 smoutput 0 : 0
 Try:
   wd 'set track pos 11'

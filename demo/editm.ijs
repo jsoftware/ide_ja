@@ -1,6 +1,8 @@
 NB. editm demo
 
-coclass 'jademo'
+coclass 'demoeditm'
+
+onCreate=: editmdemo_run
 
 Text=: topara 0 : 0
 The King and Queen of Hearts were seated on their throne when
@@ -85,16 +87,13 @@ NB. =========================================================
 editmdemo_run=: 3 : 0
 wd 'pc editmdemo;pn "Editm Demo"'
 wd 'cc ted editm'
-wd 'set ted stylesheet *color:#00007f;background-color:#ffefd5'
 wd 'set ted text *',Text
 wd 'bin zhs'
 wd 'cc ok button;cn OK'
 wd 'cc close button;cn Close'
-wd 'pmove 100 10 700 500'
 wd 'pshow'
 NB. call these after the pshow:
 wd 'set ted select 1580 1763'
-wd 'set ted scroll 15'
 )
 
 NB. set line wrap off:
@@ -106,11 +105,9 @@ NB. wd 'set ted readonly 1'
 NB. =========================================================
 editmdemo_close=: 3 : 0
 wd 'pclose'
-showevents_ja_ 0
 )
 
 editmdemo_close_button=: editmdemo_close
 
 NB. =========================================================
-showevents_ja_ 2
-editmdemo_run''
+wd 'activity ', >coname''

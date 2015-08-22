@@ -1,5 +1,7 @@
 
-cocurrent 'demoshader'
+coclass 'demoshader'
+
+onCreate=: a_run
 
 mp=: +/ . *
 sprog=: 0
@@ -268,4 +270,5 @@ void main(void)
 )
 
 NB. =========================================================
-a_run''
+wd 'activity ', >coname''
+
