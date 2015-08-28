@@ -1,6 +1,8 @@
 require 'pacman'
 coclass 'jpacman'
 
+onCreate=: pmview_open
+
 Status=: cutopen 0 : 0
 All
 Upgrades
@@ -83,16 +85,8 @@ pm_msg=: 3 : 0
 MSGX=: y
 pmview_showlog''
 )
-pm_pac_change=: 3 : 0
-val=. 0 ". pac
-DATAX=: {.0 ". pac_cell
-row=. DATAX{(I.DATAMASK),_1
-if. row<0 do. return. end.
-PKGDATA=: (<val) (<row;0)} PKGDATA
-)
-pm_pac_mark=: 3 : 0
-DATAX=: {. 0 ". pac
-pmview_showlog''
+pm_pac_select=: 3 : 0
+DATAX=: {. 0 ". pac_click
 )
 pm_prebuild_button=: 3 : 0
 if. -. ONLINE do.
@@ -122,7 +116,7 @@ pmview_show''
 )
 pm_sel_select=: 3 : 0
 SELNDX=: (0 ". sel_select) IFSECTION } SELNDX
-pmview_show''
+pmview_sel''
 )
 pm_bsummary_button=: pm_msg bind 0
 pm_bhistory_button=: pm_msg bind 1
@@ -173,26 +167,40 @@ setfiles ''
 readlocal''
 if. -. checkonline'' do. 0 return. end.
 pacman_init 1
-pmview_open''
-pmview_show''
+wd 'activity ', >coname''
 1
 )
-pmview_selected=: 3 : 'PKGDATA #~ > {."1 PKGDATA'
+pmview_selected=: 3 : 0
+if. _1= {. selection=. 0 ". wd 'get pac select' do.
+  ''
+else.
+  PKGDATA {~ selection{(I.DATAMASK)
+end.
+)
 pmview_show=: 3 : 0
 wd 'psel pm'
 pmview_getmask ''
 sel=. IFSECTION pick Status;<SECTION
 wd 'set sel items ',toDEL sel
-wd 'setselect sel ',":IFSECTION { SELNDX
-wd 'setenable apply ',":ONLINE
+wd 'set sel select ',":IFSECTION { SELNDX
+wd 'set apply enable ',":ONLINE
+pmview_showdata DATAMASK # PKGDATA
+)
+pmview_sel=: 3 : 0
+wd 'psel pm'
+pmview_getmask ''
+wd 'set apply enable ',":ONLINE
 pmview_showdata DATAMASK # PKGDATA
 )
 pmview_showdata=: 3 : 0
 VIEWDATA=: y
-dat=. ": each 5 {."1 VIEWDATA
-wd 'set pac shape ',":$dat
-wd 'set pac type 100 0 0 0 0'
-wd 'set pac data *',toDEL dat
+n=. 1{"1 VIEWDATA
+v1=. 2{"1 VIEWDATA
+v2=. 3{"1 VIEWDATA
+wd 'set pac items *',toDEL n ,&.> (<LF) ,&.> v1 ,&.> (<' / ') ,&.> v2
+if. #selection=. I. ; {."1 VIEWDATA  do.
+  wd 'set pac select ', ":selection
+end.
 )
 pmview_showlog=: 3 : 0
 if. window=0 do. return. end.
@@ -201,7 +209,7 @@ if. MSGX=3 do.
 else.
   ndx=. DATAX{(I.DATAMASK),_1
   if. ndx<0 do.
-    t=. ''
+    t=. _1
   else.
     p=. '~addons/',(<ndx;1){:: PKGDATA
     select. MSGX
@@ -214,9 +222,9 @@ else.
     end.
   end.
 end.
-if. 2 ~: 3!:0 t do. t=. '' end.
-wd 'set edlog text *',t
-if. MSGX=3 do. wd 'set edlog scroll max' end.
+if. 2 = 3!:0 t do.
+  textview (MSGX{::'Summary';'History';'Manifest';'Log');'';t
+end.
 )
 addon_info=: 3 : 0
 if. 0=#PKGDATA do. return.end.
@@ -227,12 +235,9 @@ if. 'base library'-:a do. a=. 'JAL' else. a=. 'Addons/',a end.
 browse_j_ 'http://www.jsoftware.com/jwiki/',a
 )
 loggui=: 3 : 0
-LOGTXT=: LOGTXT,<;.2 y,LF -. {: y
+LOGTXT=: LOGTXT, t=. <;.2 y,LF -. {: y
 if. window=0 do. return. end.
-wd 'set blog 1'
-MSGX=: 3
-pmview_showlog''
-wd 'msgs'
+wd 'mb toast *', ;t
 )
 pkglater=: 3 : 0
 if. 0=#PKGDATA do. $0 return. end.
@@ -255,51 +260,10 @@ menu prebuild "&Rebuild all Repository Catalogs";
 menusep;
 menu remove "Re&move Selected Packages";
 menupopz;
-splith 0 1 100 100;
-cc sel listbox;
-bin p5h;
-cc bstatus radiobutton;cn "Status";
-cc bsection radiobutton group;cn "Category";
-bin zp5;
-groupbox Selections;
-cc bclear button;cn "Clear All";
-cc bupdate button;cn "Updates";
-cc bnotins button;cn "Not Installed";
-cc bselall button;cn "Select All";
-bin p5;
-cc apply button;cn "Install";
-groupboxend;
-splitsep;
-splitv 1 0 100 150;
-cc pac table selectrows;
-splitsep;
-cc edlog editm readonly;
-bin p5h;
-cc bsummary radiobutton;cn "Summary";
-cc bhistory radiobutton group;cn "History";
-cc bmanifest radiobutton group;cn "Manifest";
-cc blog radiobutton group;cn "Log";
-bin s1;
-cc binfo button;cn "Wiki";
-splitend;
-splitend;
-)
-PMVIEW_S=: 0 : 0
-pc pm;
-menupop "&File";
-menu exit "&Quit" "Ctrl+Q";
-menupopz;
-menupop "&Tools";
-menu pupcat "&Update Catalog from Server";
-menusep;
-menu prebuild "&Rebuild all Repository Catalogs";
-menusep;
-menu remove "Re&move Selected Packages";
-menupopz;
 bin v;
-cc sel combolist;
+wh _1 _2;cc sel combolist;
 bin h;
-cc bstatus radiobutton;cn "Status";
+cc bstatus radiobutton horizontal;cn "Status";
 cc bsection radiobutton group;cn "Category";
 bin s;
 cc binfo button;cn "Wiki";
@@ -314,19 +278,16 @@ cc bclear button flush;cn "Clear All";
 cc bupdate button;cn "Updates";
 cc bnotins button;cn "Not Installed";
 bin szz;
-cc pac table selectrows;
-cc edlog editm readonly;
+bin v;
+wwh 1 _1 _2;cc pac listbox multiple;
 bin h;
-cc bsummary radiobutton flush;cn "Summary";
-cc bhistory radiobutton group;cn "History";
-cc bmanifest radiobutton group;cn "Manifest";
-cc blog radiobutton group;cn "Log";
-bin sz;
+cc bsummary button;cn "Summary";
+cc bhistory button;cn "History";
+cc bmanifest button;cn "Manifest";
+cc blog button;cn "Log";
 bin z;
-)
-pmview_edlog=: 3 : 0
-MSGX=: '1' i.~ bsummary,bhistory,bmanifest,blog
-pmview_showlog''
+bin z;
+bin z;
 )
 pmview_postinit=: 3 : 0
 pmview_setmenu''
@@ -338,20 +299,10 @@ IFSECTION=: 0 ". bsection
 SELNDX=: (0 ". sel_select) IFSECTION } SELNDX
 )
 pmview_open=: 3 : 0
-if. 'Android'-:UNAME do.
-  wd PMVIEW_S
-  android_getdisplaymetrics 0
-  wd 'set edlog wh _1 ', ":72*DM_density_ja_
-else.
-  wd PMVIEW
-end.
-wd 'set bsummary 1'
-wd 'set bstatus 1'
+wd PMVIEW
+wd 'set bstatus value 1'
 wd 'pn *',SYSNAME
-wd 'set pac shape 0 5'
-wd 'set pac type 100 0 0 0 0'
-wd 'set pac hdr "     " Package Installed Latest Caption'
-wd 'pmove 100 10 900 700'
 wd 'pshow'
 window=: 1
+pmview_show''
 )
