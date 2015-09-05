@@ -10,7 +10,7 @@ STOP=: 1
 
 A=: 0 : 0
 pc a;
-minwh 300 300;cc g opengl flush;
+wh _1 _1;cc g opengl flush;
 rem form end;
 )
 

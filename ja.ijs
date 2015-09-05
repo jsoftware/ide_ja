@@ -418,7 +418,49 @@ try.
   jniCheck SetObjectArrayElement arr; 0; 0
   jniCheck iarr=. NewIntArray <#y
   jniCheck SetIntArrayRegion iarr; 0; (#y); ,y
-  jniCheck rc=. app ('gl2 ([I[Ljava/lang/Object;)I' jniMethod)~ iarr;arr
+  jniCheck rc=. app ('gl2 (Ljava/lang/String;[I[Ljava/lang/Object;)I' jniMethod)~ 'isigraph';iarr;arr
+  if. rc<0 do.
+    jniCheck array=. GetObjectArrayElement arr; 0
+    jniCheck len=. GetArrayLength <array
+    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
+    jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array
+  else.
+    jniCheck DeleteLocalRef"0 app;cls;arr;iarr
+  end.
+catch.
+  rc=. _3
+  if. 0~:exc=. ExceptionOccurred'' do.
+    if. ''-:err=. jniException exc do.
+      err=. 'JNI exception'
+    end.
+  else.
+    err=. 13!:12''
+  end.
+end.
+glresult_jgl2_=: EMPTY
+select. rc
+case. _1 do.
+  glresult_jgl2_=: buffer
+case. _2 do.
+  glresult_jgl2_=: _2 [\ <;._2 buffer
+case. _3 do.
+  smoutput 'gl2 ', ":2{.y
+  smoutput '**gl2 JNI error: ', err
+  err (13!:8) 3
+end.
+rc
+)
+
+ogl_jni_=: 3 : 0
+try.
+  buffer=. ''
+  jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
+  jniCheck cls=. FindClass <'java/lang/Object'
+  jniCheck arr=. NewObjectArray 1; cls; 0
+  jniCheck SetObjectArrayElement arr; 0; 0
+  jniCheck iarr=. NewIntArray <#y
+  jniCheck SetIntArrayRegion iarr; 0; (#y); ,y
+  jniCheck rc=. app ('gl2 (Ljava/lang/String;[I[Ljava/lang/Object;)I' jniMethod)~ 'opengl';iarr;arr
   if. rc<0 do.
     jniCheck array=. GetObjectArrayElement arr; 0
     jniCheck len=. GetArrayLength <array
