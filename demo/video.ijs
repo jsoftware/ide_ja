@@ -15,7 +15,7 @@ cc mm videoview;
 bin h;
 cc open button;cn "open local";
 wh _1 _2;
-cc localurl edit;
+cc localurl static;cn "";
 bin zh;
 bin z;
 bin h;
@@ -28,7 +28,13 @@ bin z;
 
 NB. =========================================================
 multimedia_open_button=: 3 : 0
-mmfile=. wd 'get localurl text'
+wd 'mb open1 cb "choose video" "/sdcard" ".mp4"'
+)
+
+NB. =========================================================
+multimedia_cb_open1=: 3 : 0
+mmfile=. sysdata
+wd 'set localurl text *', mmfile
 if. #mmfile do.
   wd 'set mm stop'
   wd 'set mm media ', dquote mmfile
@@ -55,7 +61,6 @@ NB. =========================================================
 demo_run=: 3 : 0
 wd MULTIMEDIA
 wd 'set url text "https://archive.org/download/test-mpeg/test-mpeg_512kb.mp4"'
-wd 'set localurl text "file:///sdcard/sample.mp4"'
 wd 'pshow'
 )
 

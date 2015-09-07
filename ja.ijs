@@ -389,9 +389,14 @@ try.
   jniCheck rc=. app ('wd (Ljava/lang/String;[Ljava/lang/Object;)I' jniMethod)~ y;arr
   if. rc<0 do.
     jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetByteArrayRegion array; 0; len; buffer=. len#{.a.
-    jniCheck DeleteLocalRef"0 app;cls;arr;array
+    if. 0=array do.
+      buffer=. ''
+      jniCheck DeleteLocalRef"0 app;cls;arr
+    else.
+      jniCheck len=. GetArrayLength <array
+      jniCheck GetByteArrayRegion array; 0; len; buffer=. len#{.a.
+      jniCheck DeleteLocalRef"0 app;cls;arr;array
+    end.
     rc;buffer
   else.
     jniCheck DeleteLocalRef"0 app;cls;arr
@@ -421,9 +426,14 @@ try.
   jniCheck rc=. app ('gl2 (Ljava/lang/String;[I[Ljava/lang/Object;)I' jniMethod)~ 'isigraph';iarr;arr
   if. rc<0 do.
     jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
-    jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array
+    if. 0=array do.
+      buffer=. 0$0
+      jniCheck DeleteLocalRef"0 app;cls;arr;iarr
+    else.
+      jniCheck len=. GetArrayLength <array
+      jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
+      jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array
+    end.
   else.
     jniCheck DeleteLocalRef"0 app;cls;arr;iarr
   end.
@@ -463,9 +473,14 @@ try.
   jniCheck rc=. app ('gl2 (Ljava/lang/String;[I[Ljava/lang/Object;)I' jniMethod)~ 'opengl';iarr;arr
   if. rc<0 do.
     jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
-    jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array
+    if. 0=array do.
+      buffer=. 0$0
+      jniCheck DeleteLocalRef"0 app;cls;arr;iarr
+    else.
+      jniCheck len=. GetArrayLength <array
+      jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
+      jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array
+    end.
   else.
     jniCheck DeleteLocalRef"0 app;cls;arr;iarr
   end.
