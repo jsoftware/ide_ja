@@ -18,7 +18,7 @@ NB. value   (hhmmss.zzz)
 
 coclass 'demodatetime'
 
-onCreate=: datetimedemo_run
+onStart=: datetimedemo_run
 
 NB. =========================================================
 DTdemo=: 0 : 0

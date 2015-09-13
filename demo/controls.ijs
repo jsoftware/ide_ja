@@ -9,7 +9,7 @@ NB. _2 wrap_content
 
 coclass 'democontrols'
 
-onCreate=: controls_run
+onStart=: controls_run
 
 Controls=: 0 : 0
 pc controls;

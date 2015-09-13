@@ -10,7 +10,7 @@ NB.  set c html text
 
 coclass 'demowebview'
 
-onCreate=: webview
+onStart=: webview
 
 NB. =========================================================
 webview=: 3 : 0

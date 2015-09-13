@@ -7,7 +7,7 @@ NB. emulated using binx and viewshow
 
 coclass 'demotabs'
 
-onCreate=: tabdemo_run
+onStart=: tabdemo_run
 
 NB. =========================================================
 Tabdemo=: 0 : 0
@@ -19,7 +19,7 @@ cc tview radiobutton horizontal;cn View;
 cc teditor radiobutton group;cn Editor;
 cc tdummy radiobutton group;cn Dummy;
 bin z;
-
+line;
 binx view v;
 cc linear radiobutton;
 cn "view linear";

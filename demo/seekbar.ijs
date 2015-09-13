@@ -12,7 +12,7 @@ NB. max,value should be integers
 
 coclass 'demoseekbar'
 
-onCreate=: sliderdemo_run
+onStart=: sliderdemo_run
 
 NB. =========================================================
 SLdemo=: 0 : 0

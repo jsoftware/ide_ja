@@ -2,7 +2,7 @@ NB. menu demo
 
 coclass 'demomenu'
 
-onCreate=: test
+onStart=: test
 
 test=: 3 : 0
 wd 'pc test'

@@ -1,8 +1,6 @@
 
 coclass 'demoviewmat'
 
-onCreate=: test1
-
 NB. =========================================================
 test1=: 3 : 0
 if. -. checkrequire_jademo_ 'viewmat';'graphics/viewmat' do. return. end.
@@ -12,4 +10,4 @@ viewmat (] +./ .*. |:) 3&#. inverse i.243
 )
 
 NB. =========================================================
-wd 'activity ', >coname''
+test1''

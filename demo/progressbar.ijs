@@ -9,7 +9,7 @@ NB. max,value should be integers
 
 coclass 'demoprogressbar'
 
-onCreate=: pbdemo_run
+onStart=: pbdemo_run
 
 NB. =========================================================
 PBdemo=: 0 : 0

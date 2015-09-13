@@ -2,7 +2,7 @@
 18!:55 <'jademo'
 coclass 'jademo'
 
-onCreate=: jademo_run
+onStart=: jademo_run
 
 sububar=: I. @(e.&'_')@]}
 maketitle=: ' '&sububar each @ cutopen ;._2
@@ -43,8 +43,6 @@ bin v;
 cc static1 static;cn "static1";
 bin h;
 cc addons button;cn "Install addons";
-bin s;
-cc showcase button;cn "Install showcase demo";
 bin z;
 wh _1 _2;cc listbox listbox;
 bin z;
@@ -107,14 +105,6 @@ require 'pacman'
 'update' jpkg ''
 'install' jpkg 'graphics/bmp graphics/gl2 graphics/plot graphics/viewmat'
 wd 'mb toast *jandroid demo addons installed'
-)
-
-NB. =========================================================
-jademo_showcase_button=: 3 : 0
-require 'pacman'
-'update' jpkg ''
-'install' jpkg 'demos/wd'
-wd 'mb toast *showcase demo installed'
 )
 
 NB. =========================================================

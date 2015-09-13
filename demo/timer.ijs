@@ -4,7 +4,7 @@ NB. argument is milliseconds
 
 coclass 'demotimer'
 
-onCreate=: timer_run
+onStart=: timer_run
 
 timer_run=: 3 : 0
 wd 'pc timer'

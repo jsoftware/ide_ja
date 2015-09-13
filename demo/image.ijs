@@ -2,7 +2,7 @@ NB. image demo
 
 coclass 'demoimage'
 
-onCreate=: imdemo_run
+onStart=: imdemo_run
 
 NB. =========================================================
 imdemo_run=: 3 : 0

@@ -26,7 +26,7 @@ NB. form_callback_open1
 coclass 'demombox'
 
 
-onCreate=: mboxdemo_run
+onStart=: mboxdemo_run
 
 mboxdemo_run=: 3 : 0
 wd 'pc mbox'

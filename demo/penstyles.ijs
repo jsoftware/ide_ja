@@ -3,7 +3,7 @@ NB. pen styles demo
 coclass 'demopenstyle'
 coinsert 'jgl2'
 
-onCreate=: penstyle_run
+onStart=: penstyle_run
 
 NB. =========================================================
 PenStyles=: cutopen 0 : 0

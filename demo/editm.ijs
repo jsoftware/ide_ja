@@ -2,7 +2,7 @@ NB. editm demo
 
 coclass 'demoeditm'
 
-onCreate=: editmdemo_run
+onStart=: editmdemo_run
 
 Text=: topara 0 : 0
 The King and Queen of Hearts were seated on their throne when

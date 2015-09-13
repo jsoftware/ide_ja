@@ -3,7 +3,8 @@ NB.
 
 coclass 'demoedit'
 
-onCreate=: edit
+
+onStart=: edit
 
 NB. =========================================================
 edit=: 3 : 0

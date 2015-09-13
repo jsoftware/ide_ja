@@ -1,7 +1,7 @@
 require 'pacman'
 coclass 'jpacman'
 
-onCreate=: pmview_open
+onStart=: pmview_open
 
 Status=: cutopen 0 : 0
 All

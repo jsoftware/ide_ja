@@ -2,7 +2,7 @@ NB. eric's gl2 demo
 
 coclass 'demogl2'
 
-onCreate=: gl2_run
+onStart=: gl2_run
 
 NB. =========================================================
 gl2_run=: 3 : 0

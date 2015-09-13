@@ -4,7 +4,7 @@ NB. android does not support video output
 
 coclass 'demovideo'
 
-onCreate=: demo_run
+onStart=: demo_run
 
 NB. =========================================================
 MULTIMEDIA=: 0 : 0
@@ -28,7 +28,7 @@ bin z;
 
 NB. =========================================================
 multimedia_open_button=: 3 : 0
-wd 'mb open1 cb "choose video" "/sdcard" ".mp4"'
+wd 'mb open1 cb "choose video" "/sdcard" ".mpg|.mp4|.mov|.wmv|.avi"'
 )
 
 NB. =========================================================

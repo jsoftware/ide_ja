@@ -1,8 +1,7 @@
 
 coclass 'demoplot'
 
-onCreate=: run
-
+NB. =========================================================
 run=: 3 : 0
 if. -. checkrequire_jademo_ 'plot';'graphics/plot' do. return. end.
 require 'plot math/misc/trig'
@@ -18,4 +17,5 @@ pd x;cos ^x
 pd 'show'
 )
 
-wd 'activity ', >coname''
+NB. =========================================================
+run''
