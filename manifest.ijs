@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.6'
+VERSION=: '1.0.7'
 
 FILES=: 0 : 0
 help.ijs
@@ -14,8 +14,10 @@ keys.ijs
 pacman.ijs
 ja.ijs
 config/
+data/
 demo/
 images/
+js/
 )
 
 DEPENDS=: 0 : 0

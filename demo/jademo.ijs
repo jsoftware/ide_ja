@@ -33,6 +33,7 @@ tabs dtabs
 timer dtimer
 video dvideo
 viewmat dviewmat
+webd3 dwebd3
 webview dwebview
 )
 
@@ -97,6 +98,7 @@ dtabs=: 'tabs' rundemo
 dtimer=: 'timer' rundemo
 dvideo=: 'video' rundemo
 dviewmat=: 'viewmat' rundemo
+dwebd3=: 'webd3' rundemo
 dwebview=: 'webview' rundemo
 
 NB. =========================================================
