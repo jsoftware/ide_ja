@@ -34,8 +34,3 @@ wd 'pshow'
 
 NB. =========================================================
 wd 'activity ', >coname''
-smoutput 0 : 0
-Try:
-  wd 'set track pos 11'
-  wd 'set track max 30'
-)

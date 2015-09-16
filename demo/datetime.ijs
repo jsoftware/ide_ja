@@ -76,8 +76,3 @@ wd 'set time2 value ', wd 'get time1 value'
 
 NB. =========================================================
 wd 'activity ', >coname''
-smoutput 0 : 0
-Try:
-  wd 'set date1 value 20120410'
-  wd 'set time1 value 140002.123'
-)

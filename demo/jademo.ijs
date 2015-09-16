@@ -105,7 +105,7 @@ NB. =========================================================
 jademo_addons_button=: 3 : 0
 require 'pacman'
 'update' jpkg ''
-'install' jpkg 'graphics/bmp graphics/gl2 graphics/plot graphics/viewmat'
+'install' jpkg 'api/gles graphics/bmp graphics/gl2 graphics/plot graphics/viewmat'
 wd 'mb toast *jandroid demo addons installed'
 )
 

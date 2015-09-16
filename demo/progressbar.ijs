@@ -25,8 +25,3 @@ wd 'pshow'
 
 NB. =========================================================
 wd 'activity ', >coname''
-smoutput 0 : 0
-Try:
-  wd 'set prog pos 11'
-  wd 'set prog max 30'
-)
