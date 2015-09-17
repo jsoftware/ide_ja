@@ -9,7 +9,7 @@ NB. creating appropriate d3 commands, then calling webview.
 coclass 'demoweb3d'
 
 D3=: file2url jpath '~addons/ide/ja/js/d3.v3.min.js'
-F0=: fread jpath '~addons/ide/ja/data/data.tsv'
+F0=: file2url jpath '~addons/ide/ja/data/data.tsv'
 
 onStart=: 3 : 0
 svgview SS
@@ -92,7 +92,7 @@ var svg = d3.select("body").append("svg")
  .append("g")
  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv.parse("data.tsv", function(error, data) {
+d3.tsv("data.tsv", function(error, data) {
  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 
  data.forEach(function(d) {
