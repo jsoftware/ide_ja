@@ -232,7 +232,7 @@ row=. DATAX{(I.DATAMASK),_1
 if. row<0 do. return. end.
 a=. (<row;1){:: PKGDATA
 if. 'base library'-:a do. a=. 'JAL' else. a=. 'Addons/',a end.
-browse_j_ 'http://www.jsoftware.com/jwiki/',a
+browse_j_ 'http://code.jsoftware.com/wiki/',a
 )
 loggui=: 3 : 0
 LOGTXT=: LOGTXT, t=. <;.2 y,LF -. {: y
