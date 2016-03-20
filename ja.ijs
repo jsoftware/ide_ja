@@ -604,7 +604,7 @@ textview=: textview_ja_
 mbinfo_ja_=: wdinfo
 coclass 'ja'
 JAREQ=: '1.0.0'
-checkjcversion=: 3 : 0
+checkjaversion=: 3 : 0
 f=. 1000 #. 0 ". ' ' I.@('.'=])} ]
 ver=. wd 'version'
 act=. f (<./ ver i.'/s') {. ver
@@ -614,6 +614,6 @@ msg=. 'The JAndroid application needs updating.',LF2
 msg=. msg,'Please download and install the latest Android apk.'
 sminfo 'JAndroid';msg
 )
-checkjcversion''
+checkjaversion^:IFJA''
 
 cocurrent 'base'
