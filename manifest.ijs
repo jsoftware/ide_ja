@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.11'
+VERSION=: '1.0.12'
 
 FILES=: 0 : 0
 help.ijs
@@ -24,7 +24,7 @@ DEPENDS=: 0 : 0
 api/jni
 )
 
-RELEASE=: 'j804 j805'
+RELEASE=: 'j805'
 
 PLATFORMS=: 'android'
 

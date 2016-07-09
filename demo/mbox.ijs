@@ -92,7 +92,7 @@ wd 'mb open1 dialog "Open file" "/sdcard"'
 )
 
 mbox_b10_button=: 3 : 0
-wd 'mb dir dialog "Open directory" "/sdcard/j804-user"'
+wd 'mb dir dialog "Open directory" "/sdcard/j805-user"'
 )
 
 mbox_dialog_positive=: 3 : 0
