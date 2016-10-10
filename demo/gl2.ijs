@@ -88,7 +88,7 @@ NB. qpixels pixels
 if. #data do.
   glpixels 20 200 40 40,data
 else.
-  immexj 'getdata_jademo_$0'
+  immexj 'getdata_demogl2_$0'
 end.
 glpaint''
 )
