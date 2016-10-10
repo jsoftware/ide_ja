@@ -90,6 +90,7 @@ if. #data do.
 else.
   immexj 'getdata_jademo_$0'
 end.
+glpaint''
 )
 
 NB. =========================================================
