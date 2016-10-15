@@ -26,6 +26,7 @@ cc gs isigraph flush;
 NB. =========================================================
 demo_gs_paint=: 3 : 0
 'w h'=: glqwh''
+glmark''
 NB. draw grid
 glfill 255 255 255 255
 glrgb 128 128 18
@@ -90,7 +91,7 @@ if. #data do.
 else.
   immexj 'getdata_demogl2_$0'
 end.
-glpaint''
+glpaints''
 )
 
 NB. =========================================================
