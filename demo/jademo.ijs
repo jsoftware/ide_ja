@@ -28,7 +28,6 @@ pen_styles dpenstyles
 plot dplot
 progressbar dprogressbar
 seekbar dseekbar
-shader dshader
 tabs dtabs
 timer dtimer
 video dvideo
@@ -36,6 +35,9 @@ viewmat dviewmat
 webd3 dwebd3
 webview dwebview
 )
+
+NB. decommitted
+NB. shader dshader
 
 NB. =========================================================
 JCDEMO=: 0 : 0
