@@ -8,6 +8,8 @@ sububar=: I. @(e.&'_')@]}
 maketitle=: ' '&sububar each @ cutopen ;._2
 fexist=: 1:@(1!:4)@boxopen ::0:
 
+asyncj=: ". wd 'getj asyncj'
+
 rundemo=: 1 : 0
 load bind ('~addons/ide/ja/demo/','.ijs',~m)
 )
@@ -28,6 +30,7 @@ pen_styles dpenstyles
 plot dplot
 progressbar dprogressbar
 seekbar dseekbar
+shader dshader
 tabs dtabs
 timer dtimer
 video dvideo
@@ -35,9 +38,6 @@ viewmat dviewmat
 webd3 dwebd3
 webview dwebview
 )
-
-NB. decommitted
-NB. shader dshader
 
 NB. =========================================================
 JCDEMO=: 0 : 0
@@ -94,7 +94,7 @@ dmenu=: 'menu' rundemo
 dpenstyles=: 'penstyles' rundemo
 dplot=: 'plot' rundemo
 dprogressbar=: 'progressbar' rundemo
-dshader=: 'shader' rundemo
+dshader=: 'shader' rundemo`notsupport@.(asyncj)
 dseekbar=: 'seekbar' rundemo
 dtabs=: 'tabs' rundemo
 dtimer=: 'timer' rundemo
