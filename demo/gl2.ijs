@@ -91,7 +91,7 @@ if. #data do.
 else.
   immexj 'getdata_demogl2_$0'
 end.
-glpaints''
+glcmds@gltrash''
 )
 
 NB. =========================================================
