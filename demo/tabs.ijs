@@ -52,7 +52,7 @@ set boxed value 1;
 set net value 1;
 set names items Bressoud Frye Rosen Wagon;
 set names select 2;
-set entry text 盛大 abc 巨嘴鸟;
+set entry text 盛大 abc 大嘴鳥;
 set list items one "two turtle doves" three "four colly birds" five six seven;
 
 )

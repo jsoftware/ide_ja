@@ -45,7 +45,7 @@ cc names combobox;
 set names items Bressoud Frye Rosen Wagon;
 set names select 2;
 cc entry edit;
-set entry text 盛大 abc 巨嘴鸟;
+set entry text 盛大 abc 大嘴鳥;
 cc ted editm readonly;
 rem demonstrate bin and child stretch:;
 bin z;
