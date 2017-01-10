@@ -6,9 +6,10 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.18'
+VERSION=: '1.0.19'
 
 FILES=: 0 : 0
+gl2.ijs
 help.ijs
 keys.ijs
 pacman.ijs
@@ -18,10 +19,6 @@ data/
 demo/
 images/
 js/
-)
-
-DEPENDS=: 0 : 0
-api/jni
 )
 
 RELEASE=: 'j805'

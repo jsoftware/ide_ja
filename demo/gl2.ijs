@@ -26,7 +26,7 @@ cc gs isigraph flush;
 NB. =========================================================
 demo_gs_paint=: 3 : 0
 'w h'=: glqwh''
-glmark''
+echo w,h
 NB. draw grid
 glfill 255 255 255 255
 glrgb 128 128 18
@@ -86,20 +86,11 @@ NB. ellipse
 glellipse 200 200 200 100
 
 NB. qpixels pixels
-if. #data do.
-  glpixels 20 200 40 40,data
-else.
-  immexj 'getdata_demogl2_$0'
-end.
-glcmds@gltrash''
-)
-
-NB. =========================================================
-getdata=: 3 : 0
-if. #data do. EMPTY return. end.
 data=: glqpixels 200 200 40 40
-smoutput 10{.data
-glpaint''
+smoutput $data
+NB. smoutput 10{.data
+glpixels 20 200 40 40,data
+glpaintx''
 )
 
 NB. =========================================================

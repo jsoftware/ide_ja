@@ -38,6 +38,7 @@ for_i. i.#PenStyles do.
   gltextxy 230,y-off
   gltext (":i),' ',i pick PenStyles
 end.
+glpaintx ''  NB. asyncj
 )
 
 wd 'activity ', >coname''

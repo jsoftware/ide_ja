@@ -27,7 +27,7 @@ EYE=: 0 0 1
 LR=: UD=: IO=: 0
 UP=: 0 1 0
 wd A
-HD=: ".wd'qhwndc g'
+HD=: wd'qhwndc g'
 wd 'ptimer 100'
 wd 'pshow'
 )
@@ -90,20 +90,20 @@ STEPS=: 200 <. STEPS + 's' = k
 STEPS=: 3 >. STEPS - 'a' = k
 LR=: LR - 0.01*'l'=k
 LR=: LR + 0.01*'r'=k
-gl_paint''
+glpaint''
 )
 
 a_timer=: 3 : 0
 if. 0=STOP do. return. end.
 R=: 360 | R + 2 * 1 1 1
-gl_sel HD
-gl_paint''
+glsel HD
+glpaint''
 )
 
 a_g_paint=: 3 : 0
 if. 0=sprog do. return. end.
 
-wh=. gl_qwh''
+wh=. glqwh''
 glClearColor 0 0 0 0
 glClear GL_COLOR_BUFFER_BIT + GL_DEPTH_BUFFER_BIT
 
@@ -142,21 +142,21 @@ glDisable GL_CULL_FACE
 
 glUseProgram 0
 
-gl_clear ''
-gl_rgb 255 255 255
-gl_textcolor ''
-gl_textxy 10 30
-gl_text 'keys: x y z a s l r F10'
-gl_textxy 10 50
-gl_text 'scale: ',":STEPS%100
-gl_textxy 10 70
-gl_text 'angle: ',":R
-gl_textxy 10 90
+glclear ''
+glrgb 255 255 255
+gltextcolor ''
+gltextxy 10 30
+gltext 'keys: x y z a s l r F10'
+gltextxy 10 50
+gltext 'scale: ',":STEPS%100
+gltextxy 10 70
+gltext 'angle: ',":R
+gltextxy 10 90
 if. 0=sprog do. return. end.
-gl_text 'matrix:'
+gltext 'matrix:'
 for_i. i.4 do.
-  gl_textxy 10, 105+i*15
-  gl_text 6j2": i{mvp
+  gltextxy 10, 105+i*15
+  gltext 6j2": i{mvp
 end.
 )
 
