@@ -26,9 +26,12 @@ R=: 20 30 0
 EYE=: 0 0 1
 LR=: UD=: IO=: 0
 UP=: 0 1 0
-wd A
+if. 0~:GLES_VERSION_jgles_ do.
+  wd ('opengl version 3.0';'opengl es') stringreplace A
+else.
+  wd A
+end.
 HD=: wd'qhwndc g'
-wd 'ptimer 100'
 wd 'pshow'
 )
 
@@ -39,9 +42,10 @@ if. p=. glGetString GL_VENDOR do. smoutput 'GL_VENDOR: ', memr 0 _1 2,~ p end.
 if. p=. glGetString GL_RENDERER do. smoutput 'GL_RENDERER: ', memr 0 _1 2,~ p end.
 if. p=. glGetString GL_SHADING_LANGUAGE_VERSION do. smoutput 'GL_SHADING_LANGUAGE_VERSION: ', memr 0 _1 2,~ p end.
 GLSL=: wglGLSL''
+sprog=: 0
+if. GLSL=0 do. return. end.
 
 wglPROC''
-sprog=: 0
 if. GLSL>120 do.
   vsrc=. vsrc2
   fsrc=. fsrc2
@@ -56,7 +60,7 @@ end.
 vsrc=. '#version ',(":GLSL),((GLSL>:300)#(*GLES_VERSION){::' core';' es'),LF,vsrc
 fsrc=. '#version ',(":GLSL),((GLSL>:300)#(*GLES_VERSION){::' core';' es'),LF,fsrc
 if.(GLSL>:300)*.0~:GLES_VERSION_jgles_ do.
-  fsrc=. ('void main';'out vec4 gl_FragColor;',LF,'void main') stringreplace fsrc
+  fsrc=. ('in vec4';'in mediump vec4';'gl_FragColor';'glFragColor';'void main';'out mediump vec4 glFragColor;',LF,'void main') stringreplace fsrc
 end.
 smoutput vsrc
 smoutput fsrc
@@ -80,6 +84,7 @@ glBindBuffer GL_ARRAY_BUFFER; 0
 sprog=: program
 
 glClearColor 0; 0; 1; 0
+wd 'ptimer 100'
 )
 
 a_g_char=: 3 : 0
@@ -104,6 +109,7 @@ a_g_paint=: 3 : 0
 if. 0=sprog do. return. end.
 
 wh=. glqwh''
+NB. glViewport 0 0,wh
 glClearColor 0 0 0 0
 glClear GL_COLOR_BUFFER_BIT + GL_DEPTH_BUFFER_BIT
 
@@ -142,7 +148,7 @@ glDisable GL_CULL_FACE
 
 glUseProgram 0
 
-glclear ''
+NB. glclear ''
 glrgb 255 255 255
 gltextcolor ''
 gltextxy 10 30
