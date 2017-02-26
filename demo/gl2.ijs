@@ -30,7 +30,7 @@ echo w,h
 NB. draw grid
 glfill 255 255 255 255
 glrgb 128 128 18
-glpen 0 1
+glpen 1 1
 for_i. 50* i.>.h%50 do.
   gllines 0,i,w,i
 end.
@@ -39,7 +39,7 @@ for_i. 50* i.>.w%50 do.
 end.
 
 glrgb 0 0 255
-glpen 5 1
+glpen 5 0
 glrgb 120 120 120
 glbrush''
 glrect 0 50,w,20
@@ -52,7 +52,7 @@ glrect 15 15 5 5
 
 NB. arc pie
 glrgb 255 0 0
-glpen 0 1
+glpen 1 0
 glrgb 0 0 255
 glbrush''
 glpie 40 140 60 60 200 70 70 0
@@ -60,7 +60,7 @@ glarc 100 100 160 160 300 170 170 0
 
 NB. clip
 glrgb 255 0 0
-glpen 5 1
+glpen 5 0
 glrgb 0 0 255
 glbrush''
 glclip 40 40 200 100
@@ -78,7 +78,7 @@ gltext 'how now'
 
 NB. polygon
 glrgba 0 255 0 128
-glpen 1 1
+glpen 1 0
 glbrush''
 glpolygon 250 200 300 300 400 100 300 150
 

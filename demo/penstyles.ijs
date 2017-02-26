@@ -7,12 +7,12 @@ onStart=: penstyle_run
 
 NB. =========================================================
 PenStyles=: cutopen 0 : 0
-No Pen
 Solid Line
 Dash Line
 Dot Line
 Dash Dot Line
 Dash Dot Dot Line
+No Pen
 )
 
 NB. =========================================================

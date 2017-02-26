@@ -148,7 +148,7 @@ glDisable GL_CULL_FACE
 
 glUseProgram 0
 
-NB. glclear ''
+glclear ''
 glrgb 255 255 255
 gltextcolor ''
 gltextxy 10 30
