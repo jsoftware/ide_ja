@@ -114,6 +114,7 @@ wd 'mb toast *jandroid demo addons installed'
 NB. =========================================================
 checkrequire=: 3 : 0
 'req install'=. y
+if. ''-:getscripts_j_ req do. 1 return. end.
 if. *./fexist getscripts_j_ req do. 1 return. end.
 wd 'mb toast *', 'To run this demo, first install: ',install
 0
