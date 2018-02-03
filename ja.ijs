@@ -133,7 +133,12 @@ coinsert_jijs_ (,copath) coname''
 p=. jpath '~addons/labs/labs/lab.ijs'
 if. addons_missing 'labs';'labs/labs';p do. return. end.
 require p
-lab_jlab_ y
+if. 0 e. $y do.
+  require '~addons/labs/labs/labs805.ijs'
+  labselect_jlab805_'' return.
+end.
+if. y -: 1 do. y=. ':' end.
+empty lab_jlab_ y
 )
 helpcontext0=: 3 : 0
 require '~addons/ide/ja/help.ijs'
