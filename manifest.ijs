@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.27'
+VERSION=: '1.0.28'
 
 FILES=: 0 : 0
 gl2.ijs
@@ -21,7 +21,7 @@ images/
 js/
 )
 
-RELEASE=: 'j805'
+RELEASE=: 'j806 j807'
 
 PLATFORMS=: 'android'
 
