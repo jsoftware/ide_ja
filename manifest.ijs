@@ -21,7 +21,8 @@ images/
 js/
 )
 
-RELEASE=: 'j806 j807'
+RELEASE=: 'j806'
+
+FOLDER=: 'ide/ja'
 
 PLATFORMS=: 'android'
-
