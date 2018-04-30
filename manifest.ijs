@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 J Android development
 )
 
-VERSION=: '1.0.29'
+VERSION=: '1.0.30'
 
 FILES=: 0 : 0
 gl2.ijs

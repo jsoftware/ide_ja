@@ -23,11 +23,11 @@ coinsert 'jgl2'
 wd 'pc penstyle escclose closeok'
 wd 'pn Pen Styles'
 wd 'wh _1 _1'
-wd 'cc g isidraw flush'
+wd 'cc g isigraph flush'
 wd 'pshow'
 )
 
-penstyle_g_resize=: 3 : 0
+penstyle_g_paint=: 3 : 0
 off=. <.-:{:glqextent'X'
 glfill 255 255 255 255
 glrgb 0 0 255

@@ -1,9 +1,8 @@
-NB. main
+NB. standard windows library
+NB.
+NB. These definitions are assumed available to other windows programs
 
-NB. require 'jni'
-NB. GetJNIENV_jni_''
-
-cocurrent 'z'
+18!:4 IFJA{'ja';'z'
 
 NB. =========================================================
 NB. *wd v           main window driver
@@ -62,7 +61,7 @@ wdqm=: (0 ". wd bind 'qm') :: (800 600 8 16 1 1 3 3 4 4 19 19 0 0 800 570"_)
 wdqp=: (wd bind 'qp') :: (''"_)
 wdqpx=: (wd bind 'qpx') :: (''"_)
 wdqscreen=: (0 ". wd bind 'qscreen') :: (264 211 800 600 96 96 32 1 _1 36 36 51"_)
-wdqwd=: (wd bind 'qwd') :: ('ja'"_)
+wdqwd=: (wd bind 'qwd')
 
 NB. =========================================================
 NB. These definitions are assumed available to other windows programs
@@ -172,11 +171,12 @@ end.
 
 wdpclose=: [: wd :: empty 'psel ' , ';pclose' ,~ ":
 
-NB. avoid require loading gl2
-NB. glreadimg=: 11!:3000
-NB. glgetimg=: 11!:3001
-NB. glwriteimg=: 11!:3002
-NB. glputimg=: 11!:3003
+NB. =========================================================
+immexj_ja_=: [: wd 'immexj *'&,
+
+NB. =========================================================
+NB. websocket interface (reserved)
+wbsk_ja_=: 11!:3050
 
 NB. =========================================================
 NB. reading file images to argb matrix
@@ -202,3 +202,40 @@ NB. format (case-insensitive) Jpeg Png
 NB. optional quality requires 1 integer
 putimg_ja_=: 11!:3003
 
+NB. =========================================================
+NB. clipboard image
+clippasteimg_ja_=: 11!:3004
+clipcopyimg_ja_=: 11!:3005
+
+NB. =========================================================
+NB. cryptography
+gethash_ja_=: 11!:3100
+getripemd160_ja_=: 11!:3101
+getmd4_ja_=: 11!:3103
+getmd5_ja_=: 11!:3104
+getsha1_ja_=: 11!:3105
+getsha224_ja_=: 11!:3106
+getsha256_ja_=: 11!:3107
+getsha384_ja_=: 11!:3108
+getsha512_ja_=: 11!:3109
+getsha3_224_ja_=: 11!:3110
+getsha3_256_ja_=: 11!:3111
+getsha3_384_ja_=: 11!:3112
+getsha3_512_ja_=: 11!:3113
+
+NB. other
+
+3 : 0 IFJA
+
+dirmatch=: 3 : 'wd ''dirmatch '', ; dquote&.> 2 {. boxopen y'
+open=: 3 : 'wd ''openj *'' , > {. getscripts_j_ y'
+smact=: wd bind 'smact'
+immexj_z_=: immexj_ja_
+wbsk_z_=: wbsk_ja_
+
+getsha1_z_=: getsha1_ja_
+gethash_z_=: gethash_ja_
+textview_z_=: textview_ja_
+
+EMPTY
+)

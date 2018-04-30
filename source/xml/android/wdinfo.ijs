@@ -1,7 +1,7 @@
 
 NB. x context
 NB. y [title;]text
-mbinfo=: 0&$: : (4 : 0)
+wdinfo=: 0&$: : (4 : 0)
 ctx=. x
 'title text'=. 2{.(boxopen y), <''
 if. 0=#text do. title=. '' [ text=. title end.

@@ -8,6 +8,5 @@ init.ijs
 util.ijs
 addons.ijs
 help.ijs
-main.ijs
-other.ijs
+winlib.ijs
 version.ijs

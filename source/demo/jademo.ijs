@@ -6,7 +6,7 @@ onStart=: jademo_run
 
 sububar=: I. @(e.&'_')@]}
 maketitle=: ' '&sububar each @ cutopen ;._2
-fexist=: 1:@(1!:4)@boxopen ::0:
+fexist=: (1:@(1!:4) :: 0:) @ (fboxname &>) @ boxopen
 
 asyncj=: ". wd 'getj asyncj'
 

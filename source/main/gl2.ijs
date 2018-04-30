@@ -63,7 +63,7 @@ glqhandles=: 11!:2060
 glrect=: 11!:2031
 glrgb=: 11!:2032
 glroundr=: 11!:2033
-glsel=: (11!:2035)@":
+glsel=: 11!:2035
 gltext=: 11!:2038
 gltextcolor=: 11!:2040
 gltextxy=: 11!:2056
@@ -81,12 +81,9 @@ glsel2=: 11!:2344
 glwaitgl=: 11!:2345
 glwaitnative=: 11!:2346
 
-glreadimg=: 11!:3000
-glgetimg=: 11!:3001
-glwriteimg=: 11!:3002
-glputimg=: 11!:3003
-glclippastimg=: 11!:3004
-glclipcopyimg=: 11!:3005
+NB. reserved
+glflush=: 11!:2348
+glnodblbuf2=: 11!:2349
 
 NB. =========================================================
 NB. keyboard events

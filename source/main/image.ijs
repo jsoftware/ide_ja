@@ -22,7 +22,7 @@ wdreadimg_jni_ (utf8 ,y)
 NB. =========================================================
 NB. write image data to memory
 NB. x rgb matrix
-NB. y 'jpeg|png' [ ; 'quality' ; '[0,100]|_1' ]
+NB. y 'jpeg|png' [ ; '[0,100]|_1' ]
 putimg=: 4 : 0
 if3=. (3=#$x) *. 3={:$x
 if. if3 do.
@@ -42,7 +42,7 @@ end.
 if. 'jpg'-:type do. type=. 'jpeg'
 end.
 type=. toupper type
-if. 'quality'-:>@{.opt do. quality=. <. >@{:opt end.
+if. #opt do. quality=. <. >@{:opt end.
 if. (_1=quality) *. ('JPEG'-:type) do. quality=. 75 end.
 if. (_1=quality) *. ('PNG'-:type) do. quality=. 100 end.
 d=. fliprgb^:(-.RGBSEQ_j_) d
@@ -52,7 +52,7 @@ r=. wdputimg_jni_ d; w; h; type; quality
 NB. =========================================================
 NB. write image data to file
 NB. x rgb matrix
-NB. y filename [ ; 'jpeg|png' [ ; 'quality' ; [0,100]|_1 ]]
+NB. y filename [ ; 'jpeg|png' [ ; [0,100]|_1 ]]
 writeimg=: 4 : 0
 if3=. (3=#$x) *. 3={:$x
 if. if3 do.
@@ -75,7 +75,7 @@ type=. tolower type
 if. 'jpg'-:type do. type=. 'jpeg'
 end.
 type=. toupper type
-if. 'quality'-:>@{.opt do. quality=. <. >@{:opt end.
+if. #opt do. quality=. <. >@{:opt end.
 if. (_1=quality) *. ('JPEG'-:type) do. quality=. 75 end.
 if. (_1=quality) *. ('PNG'-:type) do. quality=. 100 end.
 d=. fliprgb^:(-.RGBSEQ_j_) d
