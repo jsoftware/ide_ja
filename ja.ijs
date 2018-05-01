@@ -151,7 +151,7 @@ helpcontext1=: 3 : 0
 require '~addons/ide/ja/help.ijs'
 helpcontext1 y
 )
-cocurrent 'z'
+18!:4 IFJA{'ja';'z'
 wd=: 11!:0
 wdhandler=: 3 : 0
 wdq=: wd 'q'
@@ -196,7 +196,7 @@ wdqm=: (0 ". wd bind 'qm') :: (800 600 8 16 1 1 3 3 4 4 19 19 0 0 800 570"_)
 wdqp=: (wd bind 'qp') :: (''"_)
 wdqpx=: (wd bind 'qpx') :: (''"_)
 wdqscreen=: (0 ". wd bind 'qscreen') :: (264 211 800 600 96 96 32 1 _1 36 36 51"_)
-wdqwd=: (wd bind 'qwd') :: ('ja'"_)
+wdqwd=: (wd bind 'qwd')
 wdcenter=: 0:
 wdfit=: 0:
 
@@ -236,22 +236,41 @@ end.
 )
 
 wdpclose=: [: wd :: empty 'psel ' , ';pclose' ,~ ":
+immexj_ja_=: [: wd 'immexj *'&,
+wbsk_ja_=: 11!:3050
 readimg_ja_=: 11!:3000
 getimg_ja_=: 11!:3001
 writeimg_ja_=: 11!:3002
 putimg_ja_=: 11!:3003
+clippasteimg_ja_=: 11!:3004
+clipcopyimg_ja_=: 11!:3005
+gethash_ja_=: 11!:3100
+getripemd160_ja_=: 11!:3101
+getmd4_ja_=: 11!:3103
+getmd5_ja_=: 11!:3104
+getsha1_ja_=: 11!:3105
+getsha224_ja_=: 11!:3106
+getsha256_ja_=: 11!:3107
+getsha384_ja_=: 11!:3108
+getsha512_ja_=: 11!:3109
+getsha3_224_ja_=: 11!:3110
+getsha3_256_ja_=: 11!:3111
+getsha3_384_ja_=: 11!:3112
+getsha3_512_ja_=: 11!:3113
+3 : 0 IFJA
+
 dirmatch=: 3 : 'wd ''dirmatch '', ; dquote&.> 2 {. boxopen y'
 open=: 3 : 'wd ''openj *'' , > {. getscripts_j_ y'
-immexj=: [: wd 'immexj *'&,
 smact=: wd bind 'smact'
+immexj_z_=: immexj_ja_
+wbsk_z_=: wbsk_ja_
 
-clipread=: clipread_ja_
-clipwrite=: clipwrite_ja_
-getsha1=: getsha1_ja_
-gethash=: gethash_ja_
-textview=: textview_ja_
+getsha1_z_=: getsha1_ja_
+gethash_z_=: gethash_ja_
+textview_z_=: textview_ja_
 
-mbinfo_ja_=: wdinfo
+EMPTY
+)
 coclass 'ja'
 JAREQ=: '1.0.0'
 checkjaversion=: 3 : 0
