@@ -11,11 +11,11 @@ android.view.View
 )
 
 test=: 3 : 0
-'rc strings sid'=: expat_parse_xml_javalues_ 1!:1 < jpath '~Public/gui/android/test/res/values/strings.xml'
+'rc strings sid'=: expat_parse_xml_javalues_ 1!:1 < jpath '~Addons/gui/android/test/res/values/strings.xml'
 assert. 0=rc
-'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Public/gui/android/test/res/layout/layout2.xml'
+'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Addons/gui/android/test/res/layout/layout2.xml'
 assert. 0=rc
-'rc menus mid gp'=: (1,~ 1+#lid) expat_parse_xml_jamenu_ 1!:1 <jpath '~Public/gui/android/test/res/menu/main.xml'
+'rc menus mid gp'=: (1,~ 1+#lid) expat_parse_xml_jamenu_ 1!:1 <jpath '~Addons/gui/android/test/res/menu/main.xml'
 assert. 0=rc
 ((<'R_id_') ,&.> ids)=: >:@i.#ids=: lid,mid
 assert. (#@~. = #) ids  NB. unique id names

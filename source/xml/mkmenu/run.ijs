@@ -1,1 +1,1 @@
-load '~Public/gui/android/test/test5.ijs'
+load '~Addons/gui/android/test/test5.ijs'

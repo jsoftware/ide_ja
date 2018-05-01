@@ -12,7 +12,7 @@ android.view.View
 
 
 test=: 3 : 0
-'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Public/gui/android/test/res/layout/layout.xml'
+'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Addons/gui/android/test/res/layout/layout.xml'
 assert. 0=rc
 ids=: lid
 assert. (#@~. = #) ids  NB. unique id names

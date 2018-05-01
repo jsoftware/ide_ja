@@ -15,7 +15,7 @@ android.widget.SpinnerAdapter
 
 
 test=: 3 : 0
-'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Public/gui/android/test/res/layout/layout1.xml'
+'rc layouts lid'=: 1 expat_parse_xml_jalayout_ 1!:1 <jpath '~Addons/gui/android/test/res/layout/layout1.xml'
 if. rc do. smoutput layouts;lid end.
 assert. 0=rc
 ((<'R_id_') ,&.> ids)=: >:@i.#ids=: lid
@@ -28,7 +28,7 @@ NB. android activity callback
 
 onStart=: 3 : 0
 activity=: 2{y   NB. context/activity
-draws=: crunch_jadrawable_ jpath '~Public/gui/android/test/res'
+draws=: crunch_jadrawable_ jpath '~Addons/gui/android/test/res'
 vw=. (activity;18!:5'') mkview_jamkview_ layouts;ids;'';<draws
 
 setadapter activity,vw
