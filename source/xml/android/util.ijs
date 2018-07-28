@@ -71,7 +71,7 @@ NB.   (Looper.getMainLooper().getThread() == Thread.currentThread())
   l=. 'android.os.Looper' ('getMainLooper ()Landroid/os/Looper;' jniStaticMethod)~ ''
   t0=. l ('getThread ()Ljava/lang/Thread;' jniMethod)~ ''
   t1=. 'java.lang.Thread' ('currentThread ()Ljava/lang/Thread;' jniStaticMethod)~ ''
-  jniCheck MAIN_THREAD=: a.i. IsSameObject t0;t1
+  jniCheck MAIN_THREAD=: a.i. >@{. IsSameObject t0;t1
   jniCheck DeleteLocalRef"0 l;t0;t1
 end.
 EMPTY

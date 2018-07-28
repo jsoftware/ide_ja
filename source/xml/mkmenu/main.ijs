@@ -38,9 +38,9 @@ NB. Id 0=NONE
     case. 'menu' do.
       objs=. objs, rootmenu
     case. 'submenu' do.
-      objs=. objs, e=. jniCheck (cmenu{objs) ('addSubMenu (IIILCharSequence;)LSubMenu;' jniMethod)~ cgroup;id;orderInCategory;title
+      objs=. objs, e=. (cmenu{objs) ('addSubMenu (IIILCharSequence;)LSubMenu;' jniMethod)~ cgroup;id;orderInCategory;title
     case. 'item' do.
-      objs=. objs, e=. jniCheck (cmenu{objs) ('add (IIILCharSequence;)LMenuItem;' jniMethod)~ cgroup;id;orderInCategory;title
+      objs=. objs, e=. (cmenu{objs) ('add (IIILCharSequence;)LMenuItem;' jniMethod)~ cgroup;id;orderInCategory;title
     end.
     if. e do.
       if. #titleCondensed do. jniCheck e ('setTitleCondensed (LCharSequence;)LMenuItem;' jniMethod)~ <titleCondensed end.

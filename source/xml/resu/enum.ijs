@@ -11,7 +11,7 @@ if. (0~:JNIENV) *. ('Android'-:UNAME) do.
   jniCheck Typeface_SERIF=: ('SERIF Landroid/graphics/Typeface;' jniStaticField) 'android/graphics/Typeface'
 
 NB. object
-  jniCheck ARGB_8888=: NewGlobalRef < a1=. ('ARGB_8888 Landroid/graphics/Bitmap$Config;' jniStaticField) 'android/graphics/Bitmap$Config'
+  jniCheck ARGB_8888=: >@{. NewGlobalRef < a1=. ('ARGB_8888 Landroid/graphics/Bitmap$Config;' jniStaticField) 'android/graphics/Bitmap$Config'
   jniCheck DeleteLocalRef <a1
 end.
 ''

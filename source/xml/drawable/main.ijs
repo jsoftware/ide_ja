@@ -15,7 +15,7 @@ for_dw. 1!:0 path, '/drawable*' do.
     id=. dpi,~ ({.~ i:&'.') d
     try.
       jniCheck bm=. 'android.graphics.BitmapFactory' ('decodeFile (LString;)LBitmap;' jniStaticMethod)~ <dw2
-      rs=. rs, id;NewGlobalRef <bm
+      rs=. rs, id; >@{. NewGlobalRef <bm
       jniCheck DeleteLocalRef <bm
     catch.
       ExceptionClear''
@@ -27,7 +27,7 @@ rs
 
 NB. example to get bitmap from data
 NB. pic=. 1!:1 <file
-NB. ba=. jniCheck NewByteArray <#pic
+NB. jniCheck ba=. >@{. NewByteArray <#pic
 NB. jniCheck SetByteArrayRegion ba;0;(#pic);pic
-NB. bm=. jniCheck 'android.graphics.BitmapFactory' ('decodeByteArray ([BII)LBitmap;' jniStaticMethod)~ ba;0;#pic
+NB. bm=. 'android.graphics.BitmapFactory' ('decodeByteArray ([BII)LBitmap;' jniStaticMethod)~ ba;0;#pic
 NB. jniCheck DeleteLocalRef <ba

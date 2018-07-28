@@ -24,9 +24,9 @@ if. 0=ctx do. cctx=. app ('getApplicationContext ()LContext;' jniMethod)~ '' els
 if. 0=intent do.
   cintent=. 'android.content.Intent' jniNewObject~ ''
   if. IFQT do.
-    jniCheck jnact=. FindClass <'com/jsoftware/jn/android/app/Activity'
+    jniCheck jnact=. >@{. FindClass <'com/jsoftware/jn/android/app/Activity'
   else.
-    jniCheck jnact=. FindClass <'com/jsoftware/jn/android/app/Activity'
+    jniCheck jnact=. >@{. FindClass <'com/jsoftware/jn/android/app/Activity'
   end.
   cintent ('setClass (LContext;LClass;)LIntent;' jniMethod)~ cctx;jnact
   cintent ('putExtra (LString;LString;)LIntent;' jniMethod)~ 'locale';locale

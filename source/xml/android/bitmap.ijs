@@ -16,10 +16,10 @@ jniCheck w=. bm ('getWidth ()I' jniMethod)~ ''
 jniCheck h=. bm ('getHeight ()I' jniMethod)~ ''
 d=. (w*h)#2-2
 
-jniCheck colors=. NewIntArray <#d
+jniCheck colors=. >@{. NewIntArray <#d
 NB. public void getPixels (int[] pixels, int offset, int stride, int x, int y, int width, int height)
 jniCheck bm ('getPixels ([IIIIIII)V' jniMethod)~ colors;0;w;0;0;w;h
-jniCheck GetIntArrayRegion colors;0;(#d);d
+jniCheck d=. >@{: GetIntArrayRegion colors;0;(#d);d
 
 NB. cleanup
 jniCheck DeleteLocalRef"0 colors;bm
@@ -31,9 +31,9 @@ d=. fliprgb^:(-.RGBSEQ_j_) d (17 b.) NOTALPHA
 NB. =========================================================
 NB. new verb for reading file images from memory to argb matrix using android
 getimg=: 3 : 0
-ba=. jniCheck NewByteArray <#y
+jniCheck ba=. >@{. NewByteArray <#y
 jniCheck SetByteArrayRegion ba;0;(#y);y
-bm=. jniCheck 'android.graphics.BitmapFactory' ('decodeByteArray ([BII)LBitmap;' jniStaticMethod)~ ba;0;#y
+bm=. 'android.graphics.BitmapFactory' ('decodeByteArray ([BII)LBitmap;' jniStaticMethod)~ ba;0;#y
 jniCheck DeleteLocalRef <ba
 if. 0=bm do. 0 0$0 return. end.
 
@@ -43,10 +43,10 @@ jniCheck w=. bm ('getWidth ()I' jniMethod)~ ''
 jniCheck h=. bm ('getHeight ()I' jniMethod)~ ''
 d=. (w*h)#2-2
 
-jniCheck colors=. NewIntArray <#d
+jniCheck colors=. >@{. NewIntArray <#d
 NB. public void getPixels (int[] pixels, int offset, int stride, int x, int y, int width, int height)
 jniCheck bm ('getPixels ([IIIIIII)V' jniMethod)~ colors;0;w;0;0;w;h
-jniCheck GetIntArrayRegion colors;0;(#d);d
+jniCheck d=. >@{: GetIntArrayRegion colors;0;(#d);d
 
 NB. cleanup
 jniCheck DeleteLocalRef"0 colors;bm
@@ -91,7 +91,7 @@ d=. d OR ALPHA
 if. IF64 do. d=. 2 ic d end.
 NB. create new pixbuf from data
 NB. public static Bitmap createBitmap (int[] colors, int offset, int stride, int width, int height, Bitmap.Config config)
-jniCheck colors=. NewIntArray <#d
+jniCheck colors=. >@{. NewIntArray <#d
 jniCheck SetIntArrayRegion colors;0;(#d);d
 jniCheck bm=. ('createBitmap ([IIIIILBitmap$Config;)LBitmap;' jniStaticMethod)~ colors;0;w;w;h;0
 jniCheck DeleteLocalRef <ba

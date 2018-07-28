@@ -87,19 +87,19 @@ wdreadimg_jni_=: 3 : 0
 try.
   buffer=. ''
   jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
-  jniCheck cls=. FindClass <'java/lang/Object'
-  jniCheck arr=. NewObjectArray 3; cls; 0
+  jniCheck cls=. >@{. FindClass <'java/lang/Object'
+  jniCheck arr=. >@{. NewObjectArray 3; cls; 0
   jniCheck SetObjectArrayElement arr; 0; 0
   jniCheck SetObjectArrayElement arr; 1; 0
   jniCheck SetObjectArrayElement arr; 2; 0
   jniCheck rc=. app ('wdreadimg (Ljava/lang/String;[Ljava/lang/Object;)I' jniMethod)~ y;arr
   if. rc=0 do.
-    jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
-    jniCheck width=. GetObjectArrayElement arr; 1
+    jniCheck array=. >@{. GetObjectArrayElement arr; 0
+    jniCheck len=. >@{. GetArrayLength <array
+    jniCheck buffer=. >@{: GetIntArrayRegion array; 0; len; buffer=. len#2-2
+    jniCheck width=. >@{. GetObjectArrayElement arr; 1
     jniCheck w=. width ('intValue ()I' jniMethod)~ ''
-    jniCheck height=. GetObjectArrayElement arr; 2
+    jniCheck height=. >@{. GetObjectArrayElement arr; 2
     jniCheck h=. height ('intValue ()I' jniMethod)~ ''
     jniCheck DeleteLocalRef"0 app;cls;arr;array;width;height
   else.
@@ -132,21 +132,21 @@ wdgetimg_jni_=: 3 : 0
 try.
   buffer=. ''
   jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
-  jniCheck cls=. FindClass <'java/lang/Object'
-  jniCheck arr=. NewObjectArray 3; cls; 0
+  jniCheck cls=. >@{. FindClass <'java/lang/Object'
+  jniCheck arr=. >@{. NewObjectArray 3; cls; 0
   jniCheck SetObjectArrayElement arr; 0; 0
   jniCheck SetObjectArrayElement arr; 1; 0
   jniCheck SetObjectArrayElement arr; 2; 0
-  jniCheck iarr=. NewByteArray <#y
+  jniCheck iarr=. >@{. NewByteArray <#y
   jniCheck SetByteArrayRegion iarr; 0; (#y); ,y
   jniCheck rc=. app ('wdgetimg ([B[Ljava/lang/Object;)I' jniMethod)~ iarr;arr
   if. rc=0 do.
-    jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetIntArrayRegion array; 0; len; buffer=. len#2-2
-    jniCheck width=. GetObjectArrayElement arr; 1
+    jniCheck array=. >@{. GetObjectArrayElement arr; 0
+    jniCheck len=. >@{. GetArrayLength <array
+    jniCheck buffer=. >@{: GetIntArrayRegion array; 0; len; buffer=. len#2-2
+    jniCheck width=. >@{. GetObjectArrayElement arr; 1
     jniCheck w=. width ('intValue ()I' jniMethod)~ ''
-    jniCheck height=. GetObjectArrayElement arr; 2
+    jniCheck height=. >@{. GetObjectArrayElement arr; 2
     jniCheck h=. height ('intValue ()I' jniMethod)~ ''
     jniCheck DeleteLocalRef"0 app;cls;arr;iarr;array;width;height
   else.
@@ -179,7 +179,7 @@ wdwriteimg_jni_=: 3 : 0
 'data w h f type quality'=. y
 try.
   jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
-  jniCheck iarr=. NewIntArray <#data
+  jniCheck iarr=. >@{. NewIntArray <#data
   jniCheck SetIntArrayRegion iarr; 0; (#data); data
   jniCheck rc=. app ('wdwriteimg ([IIILjava/lang/String;Ljava/lang/String;I)I' jniMethod)~ iarr;w;h;f;type;quality
   jniCheck DeleteLocalRef"0 app;iarr
@@ -209,16 +209,16 @@ wdputimg_jni_=: 3 : 0
 try.
   buffer=. ''
   jniCheck app=. ('theApp Lcom/jsoftware/j/android/JConsoleApp;' jniStaticField) 'com/jsoftware/j/android/JConsoleApp'
-  jniCheck cls=. FindClass <'java/lang/Object'
-  jniCheck arr=. NewObjectArray 1; cls; 0
+  jniCheck cls=. >@{. FindClass <'java/lang/Object'
+  jniCheck arr=. >@{. NewObjectArray 1; cls; 0
   jniCheck SetObjectArrayElement arr; 0; 0
-  jniCheck iarr=. NewIntArray <#data
+  jniCheck iarr=. >@{. NewIntArray <#data
   jniCheck SetIntArrayRegion iarr; 0; (#data); data
   jniCheck rc=. app ('wdputimg ([IIILjava/lang/String;I[Ljava/lang/Object;)I' jniMethod)~ iarr;w;h;type;quality;arr
   if. rc=0 do.
-    jniCheck array=. GetObjectArrayElement arr; 0
-    jniCheck len=. GetArrayLength <array
-    jniCheck GetByteArrayRegion array; 0; len; buffer=. len#{.a.
+    jniCheck array=. >@{. GetObjectArrayElement arr; 0
+    jniCheck len=. >@{. GetArrayLength <array
+    jniCheck buffer=. >@{: GetByteArrayRegion array; 0; len; buffer=. len#{.a.
     jniCheck DeleteLocalRef"0 app;cls;iarr;arr;array
   else.
     jniCheck DeleteLocalRef"0 app;cls;iarr;arr

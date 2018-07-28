@@ -26,7 +26,7 @@ NB. =========================================================
 NB. android activity callback
 
 onStart=: 3 : 0
-activity=: NewGlobalRef <2{y   NB. context/activity
+activity=: >@{. NewGlobalRef <2{y   NB. context/activity
 vw=. (activity;18!:5'') mkview_jamkview_ layouts;ids;strings;''
 jniCheck activity ('setContentView (LView;)V' jniMethod)~ vw
 jniCheck DeleteLocalRef <vw

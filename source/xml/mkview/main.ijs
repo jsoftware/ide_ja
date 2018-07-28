@@ -41,9 +41,9 @@ NB. style may affect chosing constructor
     end.
 
     if. *./ 0=attrn,stylen do.
-      objs=. objs, e=. jniCheck (elm,' LContext;') jniNewObject~ context
+      objs=. objs, e=. (elm,' LContext;') jniNewObject~ context
     else.
-      objs=. objs, e=. jniCheck (elm, ' LContext;Landroid/util/AttributeSet;I') jniNewObject~ context;attrn;stylen
+      objs=. objs, e=. (elm, ' LContext;Landroid/util/AttributeSet;I') jniNewObject~ context;attrn;stylen
     end.
 
 NB. general
@@ -66,7 +66,7 @@ NB. graphics
         if. ''-:a do.
           jniCheck e ((f,' (LDrawable;)V') jniMethod)~ 0
         else.
-          jniCheck e ((f,' (LDrawable;)V') jniMethod)~ bd=. jniCheck 'BitmapDrawable LBitmap;' jniNewObject~ a
+          jniCheck e ((f,' (LDrawable;)V') jniMethod)~ bd=. 'BitmapDrawable LBitmap;' jniNewObject~ a
           jniCheck DeleteLocalRef <bd
         end.
       end.
@@ -91,7 +91,7 @@ NB. text
     if. natt > j=. att i. <'android:textStyle' do. textStyle=. (res stringres) j{::val end.
     if. #typeface,textStyle do.
       ff=. fonts {::~ 5|(fonts=. ;:'default default_bold monospace san_serif serif') i. <typeface
-      tf=. jniCheck (((toupper ff),' LTypeface;') jniStaticField) 'android.graphics.Typeface'
+      tf=. (((toupper ff),' LTypeface;') jniStaticField) 'android.graphics.Typeface'
       st=. 4|(;:'normal bold italic bold_italic') i. <textStyle
       jniCheck e ('setTypeface (LTypeface;I)V' jniMethod)~ tf;st
     end.
