@@ -67,8 +67,6 @@ NB. =========================================================
 NB. These definitions are assumed available to other windows programs
 
 NB. wdcenter      center form on another
-NB. wdclipread    read clipboard
-NB. wdclipwrite   write to clipboard
 NB. wdfit         ensure form fits in window
 NB. wdforms       wd form info
 NB. wdget         get values from matrix, e.g. wd'q'
