@@ -74,11 +74,11 @@ assert. _1~: colorAttr
 mvpUni=: glGetUniformLocation program;'mvp'
 assert. _1~: mvpUni
 
-vbo=: >@{:glGenBuffers 2;2#_1
+glGenBuffers 2;vbo=: 2#_1
 glBindBuffer GL_ARRAY_BUFFER; {.vbo
-glBufferData GL_ARRAY_BUFFER; (#vertexData); (symdat <'vertexData'); GL_STATIC_DRAW
+glBufferData GL_ARRAY_BUFFER; (#vertexData); (15!:14 <'vertexData'); GL_STATIC_DRAW
 glBindBuffer GL_ARRAY_BUFFER; {:vbo
-glBufferData GL_ARRAY_BUFFER; (#colorData); (symdat <'colorData'); GL_STATIC_DRAW
+glBufferData GL_ARRAY_BUFFER; (#colorData); (15!:14 <'colorData'); GL_STATIC_DRAW
 glBindBuffer GL_ARRAY_BUFFER; 0
 
 sprog=: program
@@ -116,8 +116,6 @@ glClear GL_COLOR_BUFFER_BIT + GL_DEPTH_BUFFER_BIT
 glUseProgram sprog
 glEnable GL_DEPTH_TEST
 glEnable GL_CULL_FACE
-glEnable GL_BLEND
-glBlendFunc GL_SRC_ALPHA; GL_ONE_MINUS_SRC_ALPHA
 
 NB. matrix convention: current matrix on the left
 NB. note pre-multiplication
