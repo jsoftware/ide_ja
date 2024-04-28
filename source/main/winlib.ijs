@@ -2,7 +2,7 @@ NB. standard windows library
 NB.
 NB. These definitions are assumed available to other windows programs
 
-18!:4 IFJA{'ja';'z'
+cocurrent IFJA{'ja';'z'
 
 NB. =========================================================
 NB. *wd v           main window driver

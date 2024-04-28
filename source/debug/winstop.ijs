@@ -255,9 +255,9 @@ idx=. 0
 if. bloc -: CX do.
   idx jdb_stopswritedef STNAMES
 else.
-  18!:4 bloc
+  cocurrent bloc
   ids=. 4!:1 [ 1 2 3
-  18!:4 <'jdebug'
+  cocurrent <'jdebug'
   idx jdb_stopswritedef ids ,. bloc
 end.
 

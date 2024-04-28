@@ -89,20 +89,20 @@ if. 1 e. '__' E. }: name do.
   if. 0 ~: nc <b do. '' return. end.
   c=. (b,'_',loc,'_')~
   if. 1 ~: L. c do. '' return. end.
-  18!:4 c
+  cocurrent c
   nc=. 4!:0 :: _2: <a
-  18!:4 <'jdebug'
+  cocurrent <'jdebug'
   if. -. nc e. 1 2 3 do. '' return. end.
 else.
-  18!:4 bloc
+  cocurrent bloc
   nc=. 4!:0 :: _2: <name
-  18!:4 <'jdebug'
+  cocurrent <'jdebug'
   if. -. nc e. 1 2 3 do. '' return. end.
 end.
 
-18!:4 bloc
+cocurrent bloc
 def=. 5!:5 <name
-18!:4 <'jdebug'
+cocurrent <'jdebug'
 
 def
 )

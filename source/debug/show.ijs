@@ -25,9 +25,9 @@ if. 0 e. $y do. '' return. end.
 ind=. (1: e. '__'&E.) @: }: &> y
 
 NB. get name class:
-18!:4 x
+cocurrent x
 nmc=. 4!:0 :: _2: "0 y
-18!:4 <'jdebug'
+cocurrent <'jdebug'
 
 NB. set nameclass of undefined indirect
 NB. references to unknown:
@@ -39,10 +39,10 @@ med=. nmc > 0
 def=. med # y
 GDEFS=: GDEFS, def
 
-18!:4 x
+cocurrent x
 if. #val do. val=. ". &.> val end.
 if. #def do. def=. <@(5!:5) "0 def end.
-18!:4 <'jdebug'
+cocurrent <'jdebug'
 
 val=. jdb_fixnoun &.> val
 def=. (med # nmc) jdb_fixdef &.> def
